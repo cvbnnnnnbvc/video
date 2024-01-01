@@ -7,28 +7,6 @@
     <link rel="stylesheet" href="css/play.css">
     <link rel="shortcut icon" href="favicon.ico">
     <style>
-        .site-nav-search form {
-            display: inline-block;
-        }
-        .site-nav-search input[type="text"] {
-            height: 30px; 
-            border: 1px solid #ccc; 
-            border-radius: 15px;
-        }
-        .site-nav-search button {
-            height: 32px; 
-            border-radius: 15px; 
-            background-color:rgb(103, 95, 111); 
-            color: white; 
-            border: 1px solid rgb(103, 95, 111);
-            line-height: 30px; 
-            font-size: 15px;
-        }
-        .spacing {
-            margin-bottom: 20px; 
-            margin-top: 20px;
-            margin-right: 20px;
-        }
     </style>
 </head>
 <body>
@@ -47,9 +25,7 @@
         <div class="site-nav-r">
             <ul>
                 <li><a href="index.html">首页</a></li>
-                <li><a href="login.html">登录</a></li>
-                <li><a href="register.html">注册</a></li>
-                <li><a href="user.html">会员</a></li>
+                <li><a href="user.html">返回</a></li>
             </ul>
         </div>
     </div>
@@ -112,9 +88,6 @@
                 <span class="movie-name">神探夏洛克 第一季 </span><span class="movie-index">
                 </span><span class="movie-score">9.0</span>
             </div>
-            <div class="play-other-r">
-                <span class="play-other-toast">亲，如果视频加载不给力，请耐心等待！</span>
-            </div>
         </div>
     </div>
 </div>
@@ -164,30 +137,16 @@
 <!--comment start-->
 <div class="comment clearfix">
     <div class="w">
-        <!--评论登录的提示信息-->
-        <div class="comment-login">
-            <div class="comment-top">
-                <span>请先<a href="login.html">登录</a>，才可以参与评论！</span>
-            </div>
-            <div class="comment-bottom">
-                <form action="" method="post">
-                    <span class="comment-bottom-title">内容</span>
-                    <textarea class="comment-text" name="" id="" cols="30" rows="10" placeholder="视频电影免费看啦！"></textarea>
-                </form>
-                <a href="#" class="commit-comment">提交评论</a>
-                <a href="#" class="collect-comment">收藏电影</a>
-            </div>
-        </div>
         <!--电影评论的内容信息-->
         <div class="comment-con">
-            <span class="title">电影评论</span>
+            <span class="title">站长评论</span>
             <div class="comment-content">
                 <div class="userlogo">
                     <img src="images/5.png" alt="">
                 </div>
                 <div class="usercontent">
                     <div class="usercontent-title">
-                        <a href="#">小彰</a><span>评论于 2024-01-01 20:54</span>
+                        <a href="#" class="zhang">小彰</a><span>  评论于 2024-01-01 20:54</span>
                     </div>
                     <div class="usercontent-con">
                         这个影视剧真好看呀！😎
@@ -200,7 +159,7 @@
                 </div>
                 <div class="usercontent">
                     <div class="usercontent-title">
-                        <a href="#">小彰</a><span>评论于 2024-01-01 20:54</span>
+                        <a href="#" class="zhang">小彰</a><span>  评论于 2024-01-01 20:54</span>
                     </div>
                     <div class="usercontent-con">
                         福尔摩斯！！！😊🔥🔥
@@ -213,7 +172,7 @@
                     <ul>
                         <li><a class="page-btn" href="#">首页</a></li>
                         <li><a class="page-btn" href="#">上一页</a></li>
-                        <li><a class="page-btn" href="#">1&nbsp;/&nbsp;10</a></li>
+                        <li><a class="page-btn" href="#">1&nbsp;/&nbsp;1</a></li>
                         <li><a class="page-btn" href="#">下一页</a></li>
                         <li><a class="page-btn" href="#">尾页</a></li>
                     </ul>
@@ -230,45 +189,23 @@
         <div class="footer-links">
             <dl>
                 <!--注意dl下面有dt和dd两个级别，别搞混了-->
-                <dt><a href="#">关于我们</a></dt>
-                <dd><a href="#">联系我们</a></dd>
-                <dd><a href="#">网站地图</a></dd>
+                <dt><a href="#">关于</a></dt>
+                <dd><a href="#">网站简介</a></dd>
                 <dd><a href="#">常见问题</a></dd>
                 <dd><a href="#">投稿须知</a></dd>
             </dl>
             <dl>
                 <!--注意dl下面有dt和dd两个级别，别搞混了-->
-                <dt><a href="#">联系我们</a></dt>
-                <dd><a href="#">邮箱</a></dd>
-                <dd><a href="#">微博</a></dd>
-                <dd><a href="#">QQ群</a></dd>
-                <dd><a href="#">微信</a></dd>
-            </dl>
-            <dl>
-                <!--注意dl下面有dt和dd两个级别，别搞混了-->
-                <dt><a href="#">网站服务</a></dt>
-                <dd><a href="#">创业报道</a></dd>
-                <dd><a href="#">广告支持</a></dd>
-                <dd><a href="#">网站推广</a></dd>
-                <dd><a href="#">商务合作</a></dd>
+                <dt><a href="#">联系</a></dt>
+                <dd><a href="#">邮箱：  2535074727@qq.com</a></dd>
+                <dd><a href="#">QQ群：  948296371</a></dd>
+                <dd><a href="#">QQ：   2535074727</a></dd>
+                <dd><a href="#">微信：</a></dd>
             </dl>
             <dl>
                 <!--注意dl下面有dt和dd两个级别，别搞混了-->
                 <dt><a href="#">帮助中心</a></dt>
-                <dd><a href="#">登陆注册</a></dd>
-                <dd><a href="#">找回密码</a></dd>
-                <dd><a href="#">自助服务</a></dd>
                 <dd><a href="#">资源下载</a></dd>
-            </dl>
-            <dl class="last" id="lastlogo">
-                <dt><a href="#">关注我们</a></dt>
-                <dd><a href="#">微信</a></dd>
-                <dd><a href="#">QQ群</a></dd>
-                <dd><a href="#">新浪</a></dd>
-                <dd><a href="#">邮箱</a></dd>
-                <div class="img-show" id="imgshow">
-                    <img src="images/weixin.jpg" alt="">
-                </div>
             </dl>
         </div>
     </div>
