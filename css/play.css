@@ -1,5 +1,30 @@
 @charset "UTF-8";
 /*play-video start*/
+body{
+    background-color: #2E2E36;
+}
+.site-nav-search form {
+    display: inline-block;
+}
+.site-nav-search input[type="text"] {
+    height: 30px; 
+    border: 1px solid #ccc; 
+    border-radius: 15px;
+}
+.site-nav-search button {
+    height: 32px; 
+    border-radius: 15px; 
+    background-color:rgb(119, 119, 119); 
+    color: rgb(194, 194, 194); 
+    border: 1px solid rgb(119, 119, 119);
+    line-height: 30px; 
+    font-size: 15px;
+}
+.spacing {
+    margin-bottom: 20px; 
+    margin-top: 20px;
+    margin-right: 20px;
+}
 .site-nav {
     background-color: #2E2E36;
 }
@@ -7,9 +32,6 @@
     background-color: rgba(238,238,238, 0.8);
     color: white;
     padding-left: 5px;
-}
-.site-nav-search button {
-    background-color: rgba(238,238,238, 0.8);
 }
 .play {
     padding-top: 110px;
@@ -209,7 +231,7 @@
     float: left;
     height: 40px;
     width: 99.2%;
-    background-color: #FCF8E3;
+    background-color: #2E2E36;
     font: 700 18px/40px 'Microsoft YaHei';
     color: #B45C5A;
 }
@@ -218,7 +240,7 @@
 }
 .comment-con {
     float: left;
-    border: 1px solid #EBCCD1;
+    border: 1px solid #5a5a5a;
 }
 .comment-content {
     float: left;
@@ -260,14 +282,14 @@
 .comment-login {
     float: left;
     width: 100%;
-    border: 1px solid #EBCCD1;
+    border: 1px solid #5a5a5a;
     margin-bottom: 25px;
 }
 .comment-top {
     height: 50px;
     width: 1195px;
     float: left;
-    background-color: #F2DEDE;
+    background-color: #2E2E36;
     font: 700 15px/50px 'Microsoft YaHei';
     padding-left: 15px;
 }
@@ -308,16 +330,19 @@
     font: 400 14px/34px 'Microsoft YaHei';
     text-align: center;
 }
-.collect-comment {
-    margin-left: 15px;
-    float: left;
-    display: block;
-    width: 104px;
-    height: 34px;
-    background-color: #D9534F;
-    margin-bottom: 15px;
-    font: 400 14px/34px 'Microsoft YaHei';
-    text-align: center;
+/*电影评论 end*/
+.zhang {
+    color:#f9712d;
+}
+.usercontent-con {
+    color: white;
+}
+.usercontent {
+    background-color:#2E2E36;
+    border: none;
+}
+.usercontent-title {    
+    background-color:#2E2E36;
+    border: none;
     color: #ffffff;
 }
-/*电影评论 end*/
