@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>神探夏洛克 第一季</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/play.css">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <style>
+    </style>
+</head>
+<body>
+<div class="site-nav clearfix">
+    <div class="w">
+        <div class="site-nav-logo">
+            <a href="../../index.html" class="logo"><img src="../../images/logo.png" alt="">紫雨</a>
+        </div>
+        <div class="site-nav-search">
+            <form action="" method="post">
+                <input type="text" placeholder=" 请输入电影名称">
+                <button type="submit">搜索</button>
+            </form>
+        </div>
+        <div class="site-nav-r">
+            <ul>
+                <li><a href="../../index.html">首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="play clearfix">
+    <div class="w">
+        <div class="play-video">
+            <iframe id="video_iframe" src="resource/0.mp4"></iframe>
+        </div>
+        <div class="play-intro">
+            <div class="play-intro-title">
+                <span class="movie-vip">电视剧</span>
+                <span class="movie-name">神探夏洛克 第一季</span>
+            </div>
+            <div class="play-intro-content">
+                <table class="play-intro-table">
+                    <tbody>
+                    <tr>
+                        <td>类型</td>
+                        <td>剧情/悬疑/犯罪</td>
+                    </tr>
+                    <tr>
+                        <td>总时长</td>
+                        <td>5小时21分钟</td>
+                    </tr>
+                    <tr>
+                        <td>首播</td>
+                        <td>2010-07-25(英国)</td>
+                    </tr>
+                    <tr>
+                        <td>评级</td>
+                        <td class="star">★&nbsp;★&nbsp;★&nbsp;★&nbsp;☆</td>
+                    </tr>
+                    <tr>
+                        <td>简介</td>
+                        <td>
+                            <div class="spacing">
+                                《神探夏洛克》是一部由BBC出品的英国迷你电视剧，该剧将原著的故事背景从19世纪大英帝国国势鼎盛的时期...
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="select-index">
+                    <a href="#" class="select-last" onclick="playPrevious()">上一集</a>
+                    <select id="select-num" class="select" onchange="playSelected()">
+                        <option value="01">第01集</option>
+                        <option value="02">第02集</option>
+                        <option value="03">第03集</option>
+                        <option value="04">第04集</option>
+                    </select>
+                    <a href="#" class="select-next" onclick="playNext()">下一集</a>
+                </div>
+            </div>
+        </div>
+        <div class="play-other">
+            <div class="play-other-l">
+                <span class="movie-name">神探夏洛克 第一季 </span><span class="movie-index">
+                </span><span class="movie-score">9.0</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function playPrevious() {
+        // 获取当前选中的集数
+        var select = document.getElementById("select-num");
+        var selectedIndex = select.selectedIndex;
+        // 检查是否有上一集
+        if (selectedIndex > 0) {
+            // 切换到上一集的视频地址
+            var videoIframe = document.getElementById("video_iframe");
+            var previousEpisode = parseInt(select.options[selectedIndex - 1].value) - 1; // 转为数字
+            videoIframe.src = "resource/" + previousEpisode + ".mp4";
+            // 更新选中项
+            select.selectedIndex = selectedIndex - 1;
+        } else {
+            alert("已经是第一集了！");
+        }
+    }
+    function playSelected() {
+        // 获取选择框中选中的集数
+        var select = document.getElementById("select-num");
+        var selectedEpisode = parseInt(select.value) - 1; // 转为数字
+        // 切换到选择的视频地址
+        var videoIframe = document.getElementById("video_iframe");
+        videoIframe.src = "resource/" + selectedEpisode + ".mp4";
+    }
+    function playNext() {
+        // 获取当前选中的集数
+        var select = document.getElementById("select-num");
+        var selectedIndex = select.selectedIndex;
+        // 检查是否有下一集
+        if (selectedIndex < select.options.length - 1) {
+            // 切换到下一集的视频地址
+            var videoIframe = document.getElementById("video_iframe");
+            var nextEpisode = parseInt(select.options[selectedIndex + 1].value) - 1; // 转为数字
+            videoIframe.src = "resource/" + nextEpisode + ".mp4";
+            // 更新选中项
+            select.selectedIndex = selectedIndex + 1;
+        } else {
+            alert("已经是最后一集了！");
+        }
+    }
+</script>
+<div class="comment clearfix">
+    <div class="w">
+        <!--电影评论的内容信息-->
+        <div class="comment-con">
+            <span class="title">站长评论</span>
+            <div class="comment-content">
+                <div class="userlogo">
+                    <img src="../../images/5.png" alt="">
+                </div>
+                <div class="usercontent">
+                    <div class="usercontent-title">
+                        <a href="#" class="zhang">小彰</a><span>  评论于 2024-01-01 20:54</span>
+                    </div>
+                    <div class="usercontent-con">
+                        这个影视剧真好看呀！😎
+                    </div>
+                </div>
+            </div>
+            <div class="comment-content">
+                <div class="userlogo">
+                    <img src="../../images/5.png" alt="">
+                </div>
+                <div class="usercontent">
+                    <div class="usercontent-title">
+                        <a href="#" class="zhang">小彰</a><span>  评论于 2024-01-01 20:54</span>
+                    </div>
+                    <div class="usercontent-con">
+                        福尔摩斯！！！😊🔥🔥
+                    </div>
+                </div>
+            </div></div></div></div>
+<div class="footer">
+    <div class="w">
+        <div class="footer-links">
+            <dl>
+                <dt><a href="#">关于</a></dt>
+                <dd><a href="#">网站简介</a></dd>
+                <dd><a href="#">常见问题</a></dd>
+                <dd><a href="#">投稿须知</a></dd>
+            </dl>
+            <dl>
+                <dt><a href="#">联系</a></dt>
+                <dd>邮箱：  2535074727@qq.com</dd>
+                <dd>QQ群：  948296371</dd>
+                <dd>QQ：   2535074727</dd>
+                <dd>微信：</dd>
+            </dl>
+            <dl>
+                <dt><a href="#">帮助中心</a></dt>
+                <dd><a href="#">资源下载</a></dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<script src="js/xframe-min-1.0.js" type="text/javascript"></script>
+<script src="js/base.js" type="text/javascript"></script>
+</body>
+</html>
