@@ -1,0 +1,229 @@
+@charset "UTF-8";
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+fieldset, img, input, button { /*fieldset组合表单中的相关元素*/
+    border: none;
+    padding: 0;
+    margin: 0;
+    /*去除input标签的外边线, 默认点击input输入框的时候会有一个蓝色的外边框线*/
+    outline-style: none;
+}
+ul, ol {
+    list-style: none; /*清除列表风格（默认列表前面的小圆点）*/
+}
+input {
+    padding-top: 0; /*这里实际上在上面已经清零了**/
+    padding-bottom: 0;
+    font-family: "SimSun", "宋体";
+}
+select, input {
+    vertical-align: middle; /*垂直居中*/
+}
+select, input, textarea {
+    font-size: 12px;
+    margin: 0;
+}
+textarea {
+    resize: none; /**防止textarea可以拖动大小*/
+}
+/*  去掉图片低测默认的3像素空白缝隙*/
+table {
+    border-collapse: collapse; /*合并外边线*/
+}
+body {
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53"; /*宋体，Unicode，统一码*/
+    color: #666;
+    background: #fff
+}
+/*清除浮动*/
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+a {
+    color: #666;
+    text-decoration: none;
+}
+a:hover {
+    color: #FF6600;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 100%;
+}
+s, i, em {
+    font-style: normal;
+    text-decoration: none;
+}
+.col-red {
+    color: #4816c8 !important;
+}
+.w {
+    width: 1210px;
+    margin: 0 auto;
+}
+.fl {
+    float: left
+}
+.fr {
+    float: right
+}
+.al {
+    text-align: left
+}
+.ac {
+    text-align: center
+}
+.ar {
+    text-align: right
+}
+.hide {
+    display: none
+}
+.site-nav {
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    /*IE6下面的阴影效果：strength是阴影大小，direction是阴影方位，单位为度，可以为负数，color是阴影颜色 */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135, Color='#000000')";
+    filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135,Color='#000000');
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=125, Strength=5);
+    position: fixed;
+    z-index: 1;
+}
+.site-nav-logo {
+    width: 205px;
+    height: 40px;
+    padding: 16px 0 16px 30px;
+    float: left;
+}
+.site-nav-logo .logo {
+    font: 700 25px/150% 'Microsoft YaHei';
+    color: red;
+}
+.site-nav-logo img {
+    padding-right: 3px;
+    width: 30px;
+    width: 30px;
+}
+.site-nav-search {
+    float: left;
+    margin-left: 145px;
+    margin-top: 16px;
+}
+.site-nav-search input {
+    float: left;
+    height: 34px;
+    width: 176px;
+    border: 1px solid #CCCCCC;
+    color: #CCCCCC;
+    font: 400 14px/34px 'Microsoft YaHei';
+}
+.site-nav-search button {
+    margin-left: -1px;
+    float: left;
+    height: 36px;
+    width: 78px;
+    background-color: #fff;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+}
+.site-nav-search button:hover {
+    background-color: #CCCCCC;
+}
+.site-nav-r {
+    float: right;
+}
+.site-nav-r ul li {
+    float: left;
+    margin-top: 16px;
+    font: 700 16px/30px 'Microsoft YaHei';
+    margin-left: 60px;
+}
+.site-nav-user {
+    float: left;
+}
+.site-nav-user a {
+    line-height: 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.site-nav-user img{
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.footer {
+    background-color: #242424;
+    width: 100%;
+    margin-top: 95px;
+    bottom: 0;
+}
+.footer-links {
+    background-color: #242424;
+    width: 100%;
+    height: 200px;
+    margin-left: 50px;
+    padding: 15px 0;
+    margin-bottom: 0px;
+    font-size: 13px;
+}
+.footer-links dl {
+    float: left;
+    width: 240px;
+}
+.footer-links dl dt {
+    height: 35px;
+    line-height: 35px;
+    font: 400 16px/35px '微软雅黑';
+}
+.footer-links dl dd {
+    height: 22px;
+    line-height: 22px;
+
+}
+.footer-links .last {
+    width: 250px;
+    position: relative;
+}
+.footer-links .last dd {
+    border-radius: 5px;
+    margin-top: 20px;
+    float: left;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font: 15px/40px 'Microsoft YaHei';
+    background-color: #F8F8F8;
+    margin-left: 15px;
+}
+.footer-links .last dd:hover {
+    cursor: pointer;
+}
+.img-show {
+    padding: 5px;
+    width: 190px;
+    height: 190px;
+    background-color: #8A2Ac6;
+    position: absolute;
+    right: 0;
+    top: -155px;
+    right: 110px;
+    border-radius: 10px;
+    background-color: #F1F1F1;
+    display: none;
+}
+.img-show img {
+    width: 190px;
+    height: 190px;
+}
