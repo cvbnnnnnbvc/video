@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频网站</title>
+    <style>
+       body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        .video-container {
+            position: relative;
+            width: 56.25vh; 
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer; /* 添加光标指针样式 */
+        }
+        .icon-container {
+            position: absolute;
+            right: 0px; /* 距离右边的距离 */
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .icon-container svg {
+            width: 38px; /* 图标的宽度 */
+            height: 38px; /* 图标的高度 */
+            fill: white;
+            cursor: pointer;
+            transition: transform 0.3s, fill 0.3s;
+        }
+        .icon-container svg:hover {
+            transform: scale(1.2);
+        }
+        .count {
+            color: white;
+            font-size: 13px;
+        }
+        .liked path {
+            fill: rgb(241, 67, 96);
+        }
+        .favorited path {
+            fill: rgb(255, 208, 0);
+        }
+        .info-container {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .text-info {
+            color: white;
+        }
+        .video-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .author-name {
+            font-size: 14px;
+        }
+        .progress-container {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #444;
+            outline: none;
+            border-radius: 5px;
+            overflow: hidden;
+            background: linear-gradient(to right, red 0%, red 0%, #444 0%, #444 100%);
+        }
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f00;
+            cursor: pointer;
+        }
+        .progress-bar::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f00;
+            cursor: pointer;
+        }
+        .progress-bar::-ms-thumb {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f00;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="video" autoplay>
+            <source src="0.mp4" type="video/mp4">
+        </video>
+        <div class="icon-container">
+            <div class="icon-item">
+                <svg id="like-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <div class="count">7981.4万</div>
+            </div>
+            <div class="icon-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v16l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                </svg>
+                <div class="count">478.1万</div>
+            </div>
+             <div class="icon-item">
+                <svg id="favorite-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 13.7a2.5 2.5 0 0 0 0-1.4l7.02-3.11c.52.46 1.2.75 1.95.75a2.5 2.5 0 1 0-2.45-2c-.03.18-.05.36-.05.54s.02.36.05.54L8.91 10.9a2.5 2.5 0 1 0 0 2.2l7.02 3.11c-.03.18-.05.36-.05.54s.02.36.05.54a2.5 2.5 0 1 0 2.45-2z"/>
+            </svg>
+        </div>
+        <div class="info-container">
+            <div class="avatar">
+                <img src="0.png" alt="Author Avatar">
+            </div>
+            <div class="text-info">
+                <div class="video-title">黑雨_Video</div>
+                <div class="author-name">上传了一个关于黑帮的故事$$$，测试</div>
+            </div>
+        </div>
+        <div class="progress-container">
+            <input type="range" id="progress-bar" class="progress-bar" value="0" max="100">
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const progressBar = document.getElementById('progress-bar');
+
+        function updateProgressBar() {
+            const value = (video.currentTime / video.duration) * 100;
+            progressBar.value = value;
+            progressBar.style.background = `linear-gradient(to right, red ${value}%, #444 ${value}%)`;
+        }
+
+        video.addEventListener('timeupdate', updateProgressBar);
+
+        progressBar.addEventListener('input', () => {
+            const time = (progressBar.value / 100) * video.duration;
+            video.currentTime = time;
+            updateProgressBar();
+        });
+
+        video.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        });
+
+        document.getElementById('like-icon').addEventListener('click', function() {
+            this.classList.toggle('liked');
+        });
+
+        document.getElementById('favorite-icon').addEventListener('click', function() {
+            this.classList.toggle('favorited');
+        });
+    </script>
+</body>
+</html>
