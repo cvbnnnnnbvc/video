@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频网站</title>
+    <title>密码朋克宣言</title>
     <style>
        body, html {
             margin: 0;
@@ -15,10 +15,14 @@
             justify-content: center;
             align-items: center;
             background-color: #000;
+            user-select: none; /* 禁止用户选择 */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            -webkit-user-select: none; /* Safari */
         }
         .video-container {
             position: relative;
-            width: 56.25vh; 
+            width: 56.25vh;
             height: 100vh;
             overflow: hidden;
             background-color: #000;
@@ -27,11 +31,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            cursor: pointer; /* 添加光标指针样式 */
         }
         .icon-container {
             position: absolute;
-            right: 0px; /* 距离右边的距离 */
+            right: 4px; /* 距离右边的距离 */
             top: 50%;
             transform: translateY(-50%);
             display: flex;
@@ -49,7 +52,7 @@
             width: 38px; /* 图标的宽度 */
             height: 38px; /* 图标的高度 */
             fill: white;
-            cursor: pointer;
+            cursor: pointer; /* 添加光标指针样式 */
             transition: transform 0.3s, fill 0.3s;
         }
         .icon-container svg:hover {
@@ -74,8 +77,8 @@
             gap: 10px;
         }
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 43px;
+            height: 43px;
             border-radius: 50%;
             overflow: hidden;
         }
@@ -92,7 +95,8 @@
             font-weight: bold;
         }
         .author-name {
-            font-size: 14px;
+            margin-top: 4px;
+            font-size: 16px;
         }
         .progress-container {
             position: absolute;
@@ -113,6 +117,7 @@
             border-radius: 5px;
             overflow: hidden;
             background: linear-gradient(to right, red 0%, red 0%, #444 0%, #444 100%);
+            cursor: pointer; 
         }
         .progress-bar::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -121,21 +126,51 @@
             height: 10px;
             border-radius: 50%;
             background: #f00;
-            cursor: pointer;
         }
         .progress-bar::-moz-range-thumb {
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: #f00;
-            cursor: pointer;
         }
         .progress-bar::-ms-thumb {
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: #f00;
-            cursor: pointer;
+        }
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            fill: white;
+            display: none; 
+        }
+        .comment-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            width: 95%;
+            margin-top: 10vh;
+            height: 80vh;
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .comment-popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            fill: #333;
         }
     </style>
 </head>
@@ -144,20 +179,23 @@
         <video id="video" autoplay>
             <source src="0.mp4" type="video/mp4">
         </video>
+        <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M6 4l15 8-15 8z"/>
+        </svg>
         <div class="icon-container">
             <div class="icon-item">
                 <svg id="like-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                 </svg>
-                <div class="count">7981.4万</div>
+                <div class="count">8307.4万</div>
             </div>
             <div class="icon-item">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <svg id="comment-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v16l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
                 </svg>
                 <div class="count">478.1万</div>
             </div>
-             <div class="icon-item">
+            <div class="icon-item">
                 <svg id="favorite-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                 </svg>
@@ -171,18 +209,27 @@
                 <img src="0.png" alt="Author Avatar">
             </div>
             <div class="text-info">
-                <div class="video-title">黑雨_Video</div>
-                <div class="author-name">上传了一个关于黑帮的故事$$$，测试</div>
+                <div class="video-title">Black Rain</div>
+                <div class="author-name">一个广泛分布的系统是无法被关闭的</div>
             </div>
         </div>
         <div class="progress-container">
             <input type="range" id="progress-bar" class="progress-bar" value="0" max="100">
+        </div>
+        <div class="comment-popup" id="commentPopup">
+            <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="cursor: pointer;">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+            <iframe src="comment.html" width="100%" height="600px" frameborder="0"></iframe>
+          
         </div>
     </div>
 
     <script>
         const video = document.getElementById('video');
         const progressBar = document.getElementById('progress-bar');
+        const playIcon = document.querySelector('.play-icon');
+        const commentPopup = document.getElementById('commentPopup');
 
         function updateProgressBar() {
             const value = (video.currentTime / video.duration) * 100;
@@ -201,8 +248,10 @@
         video.addEventListener('click', () => {
             if (video.paused) {
                 video.play();
+                playIcon.style.display = 'none'; // 暂停时隐藏播放图标
             } else {
                 video.pause();
+                playIcon.style.display = 'block'; // 播放时显示播放图标
             }
         });
 
@@ -212,6 +261,14 @@
 
         document.getElementById('favorite-icon').addEventListener('click', function() {
             this.classList.toggle('favorited');
+        });
+
+        document.getElementById('comment-icon').addEventListener('click', function() {
+            commentPopup.style.display = 'block';
+        });
+
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            commentPopup.style.display = 'none';
         });
     </script>
 </body>
