@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机头像评论区</title>
+    <style>
+        .comment-section {
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 10px;
+            max-height: 85vh;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            user-select: none; /* 禁止用户选择 */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            -webkit-user-select: none; /* Safari */
+        }
+        .comment-section::-webkit-scrollbar {
+            display: none; 
+        }
+        .comment-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .comment-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .name {
+            font-weight: bold;
+        }
+        .comment {
+            margin-top: 5px;
+        }
+        .load-more {
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            color: rgb(64, 64, 64);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="comment-section" id="commentSection">
+        <!-- 评论卡片会动态添加到这里 -->
+    </div>
+    <div class="load-more" id="loadMoreButton">继续加载</div>
+
+    <script>
+        const names = ["Alice", "Bob", "Charlie", "Dave", "Eve", "Frank"];
+        const comments = [
+            "这真是一个有趣的帖子！",
+            "我完全同意这个观点。",
+            "很棒的分享，谢谢！",
+            "我有不同的看法。",
+            "这对我很有帮助。",
+            "很高兴看到这样的内容。"
+        ];
+        const loadBatchSize = 50;
+        let loadedComments = 0;
+
+        function getRandomElement(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function addComment() {
+            const commentSection = document.getElementById('commentSection');
+
+            // 创建评论卡片元素
+            const commentCard = document.createElement('div');
+            commentCard.className = 'comment-card';
+
+            // 创建头像元素
+            const avatar = document.createElement('img');
+            avatar.className = 'avatar';
+            avatar.src = `https://i.pravatar.cc/50?u=${Math.random()}`;
+
+            // 创建评论内容元素
+            const commentContent = document.createElement('div');
+            commentContent.className = 'comment-content';
+
+            // 创建名字元素
+            const name = document.createElement('div');
+            name.className = 'name';
+            name.textContent = getRandomElement(names);
+
+            // 创建评论文本元素
+            const commentText = document.createElement('div');
+            commentText.className = 'comment';
+            commentText.textContent = getRandomElement(comments);
+
+            // 将名字和评论文本添加到评论内容元素中
+            commentContent.appendChild(name);
+            commentContent.appendChild(commentText);
+
+            // 将头像和评论内容添加到评论卡片元素中
+            commentCard.appendChild(avatar);
+            commentCard.appendChild(commentContent);
+
+            // 将评论卡片添加到评论区，并在其后添加“继续加载”按钮
+            commentSection.appendChild(commentCard);
+        }
+
+        function loadComments() {
+            for (let i = 0; i < loadBatchSize; i++) {
+                addComment();
+                loadedComments++;
+            }
+            moveLoadMoreButtonToBottom();
+        }
+
+        function moveLoadMoreButtonToBottom() {
+            const commentSection = document.getElementById('commentSection');
+            const loadMoreButton = document.getElementById('loadMoreButton');
+            commentSection.appendChild(loadMoreButton);
+        }
+
+        document.getElementById('loadMoreButton').addEventListener('click', function() {
+            loadComments();
+        });
+
+        // 初始加载评论
+        loadComments();
+    </script>
+</body>
+</html>
