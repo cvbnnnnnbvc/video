@@ -35,7 +35,7 @@
         .icon-container {
             position: absolute;
             right: 4px; /* 距离右边的距离 */
-            top: 50%;
+            top: 59%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
@@ -100,6 +100,7 @@
         }
         .progress-container {
             position: absolute;
+            margin-bottom: 15px;
             bottom: 10px;
             left: 20px;
             right: 20px;
@@ -147,7 +148,8 @@
             width: 60px;
             height: 60px;
             fill: white;
-            display: none; 
+            cursor: pointer; /* 添加光标指针样式 */
+            display: block;
         }
         .comment-popup {
             position: absolute;
@@ -176,7 +178,7 @@
 </head>
 <body>
     <div class="video-container">
-        <video id="video" autoplay>
+        <video id="video">
             <source src="0.mp4" type="video/mp4">
         </video>
         <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -245,15 +247,18 @@
             updateProgressBar();
         });
 
-        video.addEventListener('click', () => {
+        function toggleVideoPlayback() {
             if (video.paused) {
                 video.play();
-                playIcon.style.display = 'none'; // 暂停时隐藏播放图标
+                playIcon.style.display = 'none';
             } else {
                 video.pause();
-                playIcon.style.display = 'block'; // 播放时显示播放图标
+                playIcon.style.display = 'block';
             }
-        });
+        }
+
+        video.addEventListener('click', toggleVideoPlayback);
+        playIcon.addEventListener('click', toggleVideoPlayback);
 
         document.getElementById('like-icon').addEventListener('click', function() {
             this.classList.toggle('liked');
