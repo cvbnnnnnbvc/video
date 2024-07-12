@@ -26,22 +26,45 @@
             align-items: center;
             margin-bottom: 15px;
             padding: 10px;
+            border-radius: 10px;
         }
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 45x;
+            height: 45px;
             border-radius: 50%;
             margin-right: 10px;
+            margin-top: -40px;
         }
         .comment-content {
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
         }
         .name {
             font-weight: bold;
         }
         .comment {
             margin-top: 5px;
+        }
+        .like-section {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .like-section svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+        .like-count {
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        .message-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
         }
         .load-more {
             display: flex;
@@ -101,9 +124,61 @@
             commentText.className = 'comment';
             commentText.textContent = getRandomElement(comments);
 
-            // 将名字和评论文本添加到评论内容元素中
+            // 创建点赞元素
+            const likeSection = document.createElement('div');
+            likeSection.className = 'like-section';
+            likeSection.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3" />
+                </svg>
+                <span class="like-count">${Math.floor(Math.random() * 100)}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message message-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M8 9h8" />
+                    <path d="M8 13h6" />
+                    <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
+                </svg>
+            `;
+
+            likeSection.addEventListener('click', function() {
+                const likeCount = likeSection.querySelector('.like-count');
+                if (likeSection.querySelector('.icon-tabler-thumb-up')) {
+                    likeSection.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M13 3a3 3 0 0 1 2.995 2.824l.005 .176v4h2a3 3 0 0 1 2.98 2.65l.015 .174l.005 .176l-.02 .196l-1.006 5.032c-.381 1.626 -1.502 2.796 -2.81 2.78l-.164 -.008h-8a1 1 0 0 1 -.993 -.883l-.007 -.117l.001 -9.536a1 1 0 0 1 .5 -.865a2.998 2.998 0 0 0 1.492 -2.397l.007 -.202v-1a3 3 0 0 1 3 -3z" stroke-width="0" fill="currentColor" />
+                            <path d="M5 10a1 1 0 0 1 .993 .883l.007 .117v9a1 1 0 0 1 -.883 .993l-.117 .007h-1a2 2 0 0 1 -1.995 -1.85l-.005 -.15v-7a2 2 0 0 1 1.85 -1.995l.15 -.005h1z" stroke-width="0" fill="currentColor" />
+                        </svg>
+                        <span class="like-count">${parseInt(likeCount.textContent) + 1}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message message-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M8 9h8" />
+                            <path d="M8 13h6" />
+                            <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
+                        </svg>
+                    `;
+                } else {
+                    likeSection.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3" />
+                        </svg>
+                        <span class="like-count">${parseInt(likeCount.textContent) - 1}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message message-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M8 9h8" />
+                            <path d="M8 13h6" />
+                            <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
+                        </svg>
+                    `;
+                }
+            });
+
+            // 将名字、评论文本和点赞部分添加到评论内容元素中
             commentContent.appendChild(name);
             commentContent.appendChild(commentText);
+            commentContent.appendChild(likeSection);
 
             // 将头像和评论内容添加到评论卡片元素中
             commentCard.appendChild(avatar);
