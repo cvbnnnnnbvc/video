@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>密码朋克宣言</title>
     <style>
-       body, html {
+        body, html {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -14,27 +14,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000;
+            background-color: #161616;
             user-select: none; /* 禁止用户选择 */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
             -webkit-user-select: none; /* Safari */
         }
+
         .video-container {
             position: relative;
             width: 56.25vh;
             height: 100vh;
             overflow: hidden;
             background-color: #000;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
         }
         video {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
         .icon-container {
             position: absolute;
-            right: 4px; /* 距离右边的距离 */
+            right: 4px; 
             top: 59%;
             transform: translateY(-50%);
             display: flex;
@@ -49,10 +53,10 @@
             gap: 2px;
         }
         .icon-container svg {
-            width: 38px; /* 图标的宽度 */
-            height: 38px; /* 图标的高度 */
+            width: 38px; 
+            height: 38px; 
             fill: white;
-            cursor: pointer; /* 添加光标指针样式 */
+            cursor: pointer; 
             transition: transform 0.3s, fill 0.3s;
         }
         .icon-container svg:hover {
@@ -148,18 +152,33 @@
             width: 60px;
             height: 60px;
             fill: white;
-            cursor: pointer; /* 添加光标指针样式 */
+            cursor: pointer; 
             display: block;
+        }
+        .comment-text {
+            font-weight: bold;
+            font-size: 20px;
+            margin-left: 10px;
+            color: #333;
+        }
+        .comment-num {
+            font-size: 15px;
+            color: #5e5e5e;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+        .comment-t {
+            margin: 5px;
         }
         .comment-popup {
             position: absolute;
-            top: 50%;
+            top: 60%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
             width: 95%;
             margin-top: 10vh;
-            height: 80vh;
+            height: 65vh;
             padding: 10px;
             display: none;
             z-index: 1000;
@@ -174,6 +193,13 @@
             height: 20px;
             fill: #333;
         }
+        .comment-popup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            overflow: hidden;
+        }
+
     </style>
 </head>
 <body>
@@ -219,61 +245,104 @@
             <input type="range" id="progress-bar" class="progress-bar" value="0" max="100">
         </div>
         <div class="comment-popup" id="commentPopup">
+            <h4 class="comment-t">
+                <span class="comment-text">评论</span>
+                <span class="comment-num">478.12万</span>
+            </h4>
             <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="cursor: pointer;">
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             </svg>
-            <iframe src="comment.html" width="100%" height="600px" frameborder="0"></iframe>
-          
+            <iframe src="comment.html"></iframe>
         </div>
     </div>
 
     <script>
-        const video = document.getElementById('video');
-        const progressBar = document.getElementById('progress-bar');
-        const playIcon = document.querySelector('.play-icon');
-        const commentPopup = document.getElementById('commentPopup');
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById('video');
+            const progressBar = document.getElementById('progress-bar');
+            const playIcon = document.querySelector('.play-icon');
+            const commentPopup = document.getElementById('commentPopup');
+            const commentIcon = document.getElementById('comment-icon');
+            let isCommentOpen = false;
 
-        function updateProgressBar() {
-            const value = (video.currentTime / video.duration) * 100;
-            progressBar.value = value;
-            progressBar.style.background = `linear-gradient(to right, red ${value}%, #444 ${value}%)`;
-        }
-
-        video.addEventListener('timeupdate', updateProgressBar);
-
-        progressBar.addEventListener('input', () => {
-            const time = (progressBar.value / 100) * video.duration;
-            video.currentTime = time;
-            updateProgressBar();
-        });
-
-        function toggleVideoPlayback() {
-            if (video.paused) {
-                video.play();
-                playIcon.style.display = 'none';
-            } else {
-                video.pause();
-                playIcon.style.display = 'block';
+            function updateProgressBar() {
+                const value = (video.currentTime / video.duration) * 100;
+                progressBar.value = value;
+                progressBar.style.background = `linear-gradient(to right, red ${value}%, #444 ${value}%)`;
             }
-        }
 
-        video.addEventListener('click', toggleVideoPlayback);
-        playIcon.addEventListener('click', toggleVideoPlayback);
+            video.addEventListener('timeupdate', updateProgressBar);
 
-        document.getElementById('like-icon').addEventListener('click', function() {
-            this.classList.toggle('liked');
-        });
+            progressBar.addEventListener('input', () => {
+                const time = (progressBar.value / 100) * video.duration;
+                video.currentTime = time;
+                updateProgressBar();
+            });
 
-        document.getElementById('favorite-icon').addEventListener('click', function() {
-            this.classList.toggle('favorited');
-        });
+            function toggleVideoPlayback() {
+                if (video.paused) {
+                    video.play();
+                    playIcon.style.display = 'none';
+                } else {
+                    video.pause();
+                    playIcon.style.display = 'block';
+                }
+            }
 
-        document.getElementById('comment-icon').addEventListener('click', function() {
-            commentPopup.style.display = 'block';
-        });
+            video.addEventListener('click', function() {
+                if (!commentPopup.style.display || commentPopup.style.display === 'none') {
+                    toggleVideoPlayback();
+                }
+            });
 
-        document.querySelector('.close-btn').addEventListener('click', function() {
-            commentPopup.style.display = 'none';
+            playIcon.addEventListener('click', function() {
+                if (!commentPopup.style.display || commentPopup.style.display === 'none') {
+                    toggleVideoPlayback();
+                }
+            });
+
+            document.getElementById('like-icon').addEventListener('click', function() {
+                this.classList.toggle('liked');
+            });
+
+            document.getElementById('favorite-icon').addEventListener('click', function() {
+                this.classList.toggle('favorited');
+            });
+
+            commentIcon.addEventListener('click', function() {
+                if (isCommentOpen) {
+                    video.style.height = 'auto';
+                    video.style.width = '100%';
+                    video.style.position = 'static';
+                    commentPopup.style.display = 'none';
+                    isCommentOpen = false;
+                } else {
+                    video.style.height = '40vh';
+                    video.style.width = 'auto';
+                    video.style.position = 'absolute';
+                    video.style.top = '0';
+                    commentPopup.style.display = 'block';
+                    isCommentOpen = true;
+                }
+            });
+
+            document.querySelector('.close-btn').addEventListener('click', function() {
+                commentPopup.style.display = 'none';
+                video.style.height = '100vh';
+                video.style.width = '100%';
+                video.style.position = 'static';
+                isCommentOpen = false;
+            });
+
+            document.querySelector('.video-container').addEventListener('click', function(event) {
+                if (event.target === video && commentPopup.style.display === 'block') {
+                    commentPopup.style.display = 'none';
+                    video.style.height = 'auto';
+                    video.style.width = '100%';
+                    video.style.position = 'static';
+                    isCommentOpen = false;
+                }
+            });
         });
     </script>
 </body>
